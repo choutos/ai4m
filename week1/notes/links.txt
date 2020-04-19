@@ -1,0 +1,3 @@
+https://www.kaggle.com/c/rsna-pneumonia-detection-challenge
+https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation
+https://www.kaggle.com/c/rsna-intracranial-hemorrhage-detection

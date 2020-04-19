@@ -1,0 +1,98 @@
+\documentclass[a4paper,12pt]{article}
+
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}  
+\makeatletter
+\def\@seccntformat#1{%
+	\expandafter\ifx\csname c@#1\endcsname\c@section\else
+	\csname the#1\endcsname\quad
+	\fi}
+\makeatother
+
+
+\title{Disease Detection with Computer Vision}
+\author{By V\'itor Andrade}
+
+
+\begin{document}
+\maketitle
+
+\section{Building and training a model for medical diagnosis}
+
+
+Labels: Positive, Negative.\\\\
+The algorithm produces an output in the form of scores, which are probabilities for each label.\\
+Before training these scores are not going to match the desired label.\\\\
+\begin{tabular}{|c c c|}
+\hline
+Desired Label & Score & Error (Loss) \\
+\hline
+\textbf{Positive: 1} & 0.48 & 0.32 \\
+\textbf{Negative: 0} & 0.51 & 0.31 \\
+\hline
+\end{tabular}\\\\
+After training:\\
+\begin{tabular}{|c c c|}
+	\hline
+	Desired Label & Score & Error (Loss) \\
+	\hline
+	\textbf{Positive: 1} & 0.60 & 0.22 \\
+	\textbf{Negative: 0} & 0.30 & 0.15 \\
+	\hline
+\end{tabular}\\\\
+\\
+We can measure this error by \textbf{computing a loss function}. A loss function measures the error between our output probability and the desired label.
+\begin{equation}
+Probabilities\left\{
+\begin{array}{@{}ll@{}}
+P(Y=1|X) & \text{if}\ \ y=1 \nonumber \\
+P(Y=0|X) & \text{if}\ \ y=0
+\end{array}\right.
+\end{equation} 
+\\\\\\
+\section{Three Key challenges}
+\begin{itemize}
+	\item Class Imbalance
+	\item Multi-Task
+	\item Dataset Size
+\end{itemize}
+
+\subsection{Class Imbalance}
+In medical datasets, the number of disease and non-disease examples are not equal. This a reflection of the prevalence or frequency of disease in the real-world. In a medical dataset, you might see 100 times as many normal examples as mass examples.\\
+This yields a model that starts to predict a very low probability of disease for everybody and won't be able to identify when an example has a disease.\\
+\\
+Imagine an example of a chest x-ray that contains a mass, so it gets labeled with 1 and the algorithm outputs a probability of 0.2. Now, the 0.2 here is the probability according to the algorithm of Y being equal to 1, the probability that this example is a mass. So now, we can apply the loss function to compute the loss on this example.
+\\\\
+\textbf{Binary cross-entropy loss:}
+\begin{equation}
+L(X,y)=\left\{
+\begin{array}{@{}ll@{}}
+-log P(Y=1|X) & \text{if}\ \ y=1 \nonumber \\
+-log P(Y=0|X) & \text{if}\ \ y=0
+\end{array}\right.
+\end{equation} 
+
+Example Label 1:\\
+Probability of Y = 1: P(Y=1|X)\\
+L=-log()0.2)=0.10\\
+
+Example Label 0:\\
+Probability of Y = 0: P(Y=0|X) = 1 - P(Y=1|X)\\
+L=-log(1-0.7)=0.52
+\\
+\\
+The \textbf{solution to the class imbalance problem} is to modify the loss function, to weight the normal and the mass classes differently. 
+\\\\
+\begin{equation}
+L(X,y)=\left\{
+\begin{array}{@{}ll@{}}
+w_p * -log P(Y=1|X) & \text{if}\ \ y=1 \nonumber \\
+w_p * -log P(Y=0|X) & \text{if}\ \ y=0
+\end{array}\right.
+\end{equation}
+\\
+We want to weight the positive examples more, such that they can have an equal contribution overall to the loss, as the normal examples.
+
+\end{document}
