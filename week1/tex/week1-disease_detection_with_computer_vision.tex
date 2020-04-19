@@ -89,7 +89,7 @@ The \textbf{solution to the class imbalance problem} is to modify the loss funct
 L(X,y)=\left\{
 \begin{array}{@{}ll@{}}
 w_p * -log P(Y=1|X) & \text{if}\ \ y=1 \nonumber \\
-w_p * -log P(Y=0|X) & \text{if}\ \ y=0
+w_n * -log P(Y=0|X) & \text{if}\ \ y=0
 \end{array}\right.
 \end{equation}
 \\
@@ -122,7 +122,38 @@ Instead of examples having one label, they now have one label for every disease 
 	\hline
 \end{tabular}\\
 \\
-To train such an algorithm, we also need to make the modification to the loss funcion from the binary tasks to the multitask setting.
+To train such an algorithm, we also need to make the modification to the loss function from the binary tasks to the multitask setting.\\
+We can represent our new loss as the \textbf{sum of the losses over the multiple diseases}.\\
+\[ L(X,y)=L(X,y_{mass}) + L(X,y_{pneumonia}) + L(X,y_{edema}) \]\\
+This is called the \textbf{Multi-Label Loss} or the \textbf{Multi-Task Loss}.\\
+\\
+Here is the table updated with the new loss.\\
+\\
+\begin{tabular}{|c c c|}
+	\hline
+	(mass, pneumonia, edema) & Prediction Probabilities & Loss\\
+	\hline
+	P1 0, 1, 0 & 0.3, 0.1, 0.8 & 0.52 + 1.00 + 0.70\\
+	P2 0, 0, 1 & 0.1, 0.1, 0.8 & 0.05 + 0.05 + 0.10\\
+	P3 0, 1, 1 & 0.2, 0.2, 0.7 & 0.10 + 0.70 + 0.15\\
+	P4 1, 0, 1 & 0.6, 0.3, 0.8 & 0.22 + 0.52 + 0.10\\
+	P5 1, 1, 1 & 0.7, 0.7, 0.9 & 0.15 + 0.15 + 0.05\\
+	P6 1, 0, 0 & 0.8, 0.1, 0.2 & 0.10 + 0.05 + 0.10\\
+	P7 0, 1, 1 & 0.3, 0.9, 0.8 & 0.52 + 0.05 + 0.10\\
+	\hline
+\end{tabular}\\
+\\\\
+\textbf{Multi-task + Class imbalance}\\
 
-
+One final consideration is how we can account for class imbalance in the multitask setting.\\
+Once again, we can apply the weighted loss that we have covered earlier. This time, we not only have a weight associated with just the positive and the negative labels, but it's for the positive and negative labels associated with that particular class.\\
+\[ L(X,y_{mass}) + L(X,y_{pneumonia}) + L(X,y_{edema}) \]
+\begin{equation}
+L(X,y_{mass})=\left\{
+\begin{array}{@{}ll@{}}
+w_{p,mass} * -log P(Y=1|X) & \text{if}\ \ y=1 \nonumber \\
+w_{n,mass} * -log P(Y=0|X) & \text{if}\ \ y=0
+\end{array}\right.
+\end{equation}
+\subsection{Dataset Size}
 \end{document}
