@@ -103,5 +103,26 @@ Another solution to tackle the class imbalance problem is \textbf{re-sampling}. 
 We do this excluding negative examples and duplicating positive examples.
 
 \subsection{Multi-Task}
+In the real work, we care about classifying the presence or absence of many diseases. One approach is to have models that each learn one of these tasks.\\
+However, maybe we can learn to do all of the tasks using one model. An advantage of this is that we can learn features that are common to identifying more than one disease, allowing us to use our existing data more efficiently.\\
+\\
+Instead of examples having one label, they now have one label for every disease \textit{(P1 0,1,0)}\\
+\\
+\begin{tabular}{|c c|}
+	\hline
+	(mass, pneumonia, edema) & Prediction Probabilities \\
+	\hline
+	P1 0, 1, 0 & 0.3, 0.1, 0.8 \\
+	P2 0, 0, 1 & 0.1, 0.1, 0.8 \\
+	P3 0, 1, 1 & 0.2, 0.2, 0.7 \\
+	P4 1, 0, 1 & 0.6, 0.3, 0.8 \\
+	P5 1, 1, 1 & 0.7, 0.7, 0.9 \\
+	P6 1, 0, 0 & 0.8, 0.1, 0.2 \\
+	P7 0, 1, 1 & 0.3, 0.9, 0.8 \\
+	\hline
+\end{tabular}\\
+\\
+To train such an algorithm, we also need to make the modification to the loss funcion from the binary tasks to the multitask setting.
+
 
 \end{document}
