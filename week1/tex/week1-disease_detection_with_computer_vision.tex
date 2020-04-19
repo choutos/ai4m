@@ -93,6 +93,15 @@ w_p * -log P(Y=0|X) & \text{if}\ \ y=0
 \end{array}\right.
 \end{equation}
 \\
-We want to weight the positive examples more, such that they can have an equal contribution overall to the loss, as the normal examples.
+\[ w_p=\frac{num\ negative}{num total} \ \ \textrm{ }
+\ \ w_n=\frac{num\ positive}{num total} \]
+\\
+We want to weight the positive examples more, such that they can have an equal contribution overall to the loss, as the normal examples.\\
+\\
+Another solution to tackle the class imbalance problem is \textbf{re-sampling}. The basic idea here is to re-sample the dataset such that we have an equal number of negative and positive examples.\\
+\\
+We do this excluding negative examples and duplicating positive examples.
+
+\subsection{Multi-Task}
 
 \end{document}
