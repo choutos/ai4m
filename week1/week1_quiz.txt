@@ -1,0 +1,82 @@
+1. Which of the following is not one of the key challenges for AI diagnostic algorithms that is discussed in the lecture?  
+
+[Class imbalance]
+* [Inflexible models]
+[Dataset size]
+[Multiple tasks]
+
+2. You find that your training set has 70% negative examples and 30% positive. Which of the following techniques will NOT help for training this imbalanced dataset? 
+
+[Reweighting examples in training loss]
+* [Oversampling negative examples]
+[Oversampling positive examples]
+[Undersampling negative examples]
+
+3. What is the total loss from the normal (non-mass) examples in this example dataset?
+Please use the natural logarithm in your calculation. When you use numpy.log, this is using the natural logarithm. Also, to get the total loss, please add up the losses from each ‘normal’ example. 
+
+Example	  | P(positive)
+P1 Normal |	0.6
+P3 Normal |	0.3
+P5 Mass   |	0.4 
+
+[1.27]
+[0.00]
+* [2.19]
+[-0.4]
+
+#>>> import math
+#>>> a = -math.log(1-0.6)
+#>>> b = -math.log(1-0.3)
+#>>> c = -math.log(0.4)
+#>>> a+b
+#2.1892564076870427
+
+
+4. What is the typical size of medical image dataset? 
+
+* [ ~10 thousand to 100 thousand  images]
+[ ~1 million or more  images]
+[~1 to 1 hundred images]
+[~ 1 hundred to 1 thousand image]
+
+5. Which of the following data augmentations would be best to apply?
+
+[None of the above]
+[upside-down]
+[inverted (left-right)]
+* [tilted]
+
+6. Which of the following are valid methods for determining ground truth?  Choose all that apply.
+
+*[Biopsy]
+*[Confirmation by CT scan]
+*[Consensus voting from a board of doctors]
+
+7. In what order should the training, validation, and test sets be sampled? 
+
+[Validation, Test, Training]
+* [Test, Validation, Training]
+[Validation, Training, Test]
+[Training, Validation, Test]
+
+8. Why is it bad to have patients in both training and test sets?
+
+[Leaves too few images for the training set]
+* [Overly optimistic test performance]
+[Leaves too few images for the test set]
+[None of the above]
+
+9. Let’s say you have a relatively small training set (~5 thousand images). Which training strategy makes the most sense?   
+
+[Retraining the first layer of a pre-trained model]
+* [Retraining the last layer of a pre-trained model]
+[Retraining all layers of a pre-trained model]
+[Train a model with randomly initialized weights]
+
+10. Now let’s say you have a very large dataset (~1 million images). Which training strategies will make the most sense?
+
+*[Training a model with randomly initialized weights.]
+[Retraining the first layer of a pretrained model]
+* [Retraining all layers of a pretrained model]
+[Retraining the last layer of a pretrained model]
